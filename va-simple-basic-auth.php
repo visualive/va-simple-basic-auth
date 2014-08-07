@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*
 Plugin Name: VA Simple Basic Auth
 Plugin URI: https://github.com/VisuAlive/va-simple-basic-auth
-Description: .
+Description: Simply activate the plugin, can set up a basic auth to management screen.
 Author: KUCKLU
 Version: 1.0.0
 Author URI: http://visualive.jp/
