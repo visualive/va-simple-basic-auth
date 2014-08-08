@@ -1,6 +1,7 @@
 === VA Simple Basic Auth ===
 Contributors: kuck1u
-Tags: Basic auth, Auth, Security
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TNPKX9MAJL7C8
+Tags: Basic auth, BasicAuth, Auth, Security, wp-admin, wp-login
 Requires at least: 3.9.1
 Tested up to: 3.9.2
 Stable tag: trunk
@@ -8,11 +9,15 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Simply activate the plugin, can set up a basic auth to management screen.
+
+Authentication information of Basic authentication is your user name and password of WordPress.
+
 This plugin the very simple.
 
 == Description ==
 
-Simply activate the plugin, can set up a basic auth to management screen.
+Simply activate the plugin, can set up a basic auth to management screen.  
+Authentication information of Basic authentication is your user name and password of WordPress.  
 This plugin the very simple.
 
 == Installation ==
