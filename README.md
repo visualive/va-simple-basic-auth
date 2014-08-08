@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Description
 
-Simply activate the plugin, can set up a basic auth to management screen.  
-Authentication information of Basic authentication is your user name and password of WordPress.  
-This plugin the very simple.  
+Simply by enabling the plugin can set up a basic auth to dashboard and login page.  
+Auth information of Basic auth is your user name and password of WordPress.  
+This plugin the very simple.
 
 ## Installation
 
