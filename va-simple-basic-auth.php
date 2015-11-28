@@ -40,14 +40,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * @license http://opensource.org/licenses/gpl-2.0.php GPLv2
  * @link http://visualive.jp/
  */
-if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
-	$vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
-	define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );
-	define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
-	define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename(__FILE__) ) );
-	define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
-	define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
+$vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
+define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );
+define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename(__FILE__) ) );
+define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
+define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
 
+if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
+	/**
+	 * VA_SIMPLE_BASIC_AUTH
+	 */
 	class VA_SIMPLE_BASIC_AUTH {
 		function __construct() {
 			register_activation_hook( __FILE__, array( $this, '_vasba_activation' ) );
