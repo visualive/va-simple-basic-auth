@@ -1,4 +1,4 @@
 linter:
   code_sniffer:
     options:
-      standard: ./test/WordPress/ruleset.xml
+      standard: PSR1
