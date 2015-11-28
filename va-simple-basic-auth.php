@@ -1,7 +1,12 @@
 <?php
 /**
- * Exit if accessed directly
+ * WordPress theme setup class.
+ *
+ * @package WordPress
+ * @subpackage VA Simple Basic Auth
+ * @author KUCKLU <kuck1u@visualive.jp>
  */
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
