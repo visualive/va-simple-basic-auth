@@ -1,5 +1,9 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Exit if accessed directly
+ */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /*
 Plugin Name: VA Simple Basic Auth
 Plugin URI: https://github.com/VisuAlive/va-simple-basic-auth
@@ -41,9 +45,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * @link http://visualive.jp/
  */
 $vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
-define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );
-define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
-define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename(__FILE__) ) );
+define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename( __FILE__ ) ) );
 define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
 define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
 
