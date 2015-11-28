@@ -1,10 +1,14 @@
 <?php
 /**
- * WordPress theme setup class.
+ * VA SIMPLE BASIC AUTH
  *
  * @package WordPress
  * @subpackage VA Simple Basic Auth
+ * @since VA Shared Count 1.0.0
  * @author KUCKLU <kuck1u@visualive.jp>
+ * @copyright Copyright (c) 2014 KUCKLU, VisuAlive.
+ * @license http://opensource.org/licenses/gpl-2.0.php GPLv2
+ * @link http://visualive.jp/
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -40,17 +44,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-/**
- * VA SIMPLE BASIC AUTH
- *
- * @package WordPress
- * @subpackage VA Simple Basic Auth
- * @since VA Shared Count 1.0.0
- * @author KUCKLU <kuck1u@visualive.jp>
- * @copyright Copyright (c) 2014 KUCKLU, VisuAlive.
- * @license http://opensource.org/licenses/gpl-2.0.php GPLv2
- * @link http://visualive.jp/
- */
+
 $vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
 define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
