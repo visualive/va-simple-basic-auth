@@ -2,5 +2,5 @@
 <ruleset name="WordPress">
 	<description>WordPress Coding Standards</description>
 
-	<rule ref="./cs.wordpress-coore.xml"/>
+	<rule ref="./cs.wordpress-core.xml"/>
 </ruleset>
