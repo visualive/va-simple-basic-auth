@@ -41,29 +41,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * @link http://visualive.jp/
  */
 if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
-$vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
-define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );
-define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
-define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename(__FILE__) ) );
-define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
-define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
+	$vasba_plugin_data = get_file_data( __FILE__, array('ver' => 'Version', 'langs' => 'Domain Path', 'mo' => 'Text Domain' ) );
+	define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_URL', plugin_dir_url(__FILE__) );
+	define( 'VA_SIMPLE_BASIC_AUTH_PLUGIN_PATH', plugin_dir_path(__FILE__) );
+	define( 'VA_SIMPLE_BASIC_AUTH_DOMAIN', dirname( plugin_basename(__FILE__) ) );
+	define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
+	define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
 
-class VA_SIMPLE_BASIC_AUTH {
-	function __construct() {
-		register_activation_hook( __FILE__, array( $this, '_vasba_activation' ) );
-		register_uninstall_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
-		// register_deactivation_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
-		add_action( 'login_init', array( $this, '_vasba_basic_auth' ), 0 );
-	}
+	class VA_SIMPLE_BASIC_AUTH {
+		function __construct() {
+			register_activation_hook( __FILE__, array( $this, '_vasba_activation' ) );
+			register_uninstall_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
+			// register_deactivation_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
+			add_action( 'login_init', array( $this, '_vasba_basic_auth' ), 0 );
+		}
 
-	/**
-	 * [_vasba_edit_htaccess description]
-	 * @link https://github.com/wokamoto/wp-basic-auth
-	 * @param  boolean $action [description]
-	 * @return [type]        [description]
-	 */
-	public function _vasba_edit_htaccess( $action = false ) {
-		$htaccess_rewrite_rule = <<< EOM
+		/**
+		 * [_vasba_edit_htaccess description]
+		 * @link https://github.com/wokamoto/wp-basic-auth
+		 * @param  boolean $action [description]
+		 * @return [type]        [description]
+		 */
+		public function _vasba_edit_htaccess( $action = false ) {
+			$htaccess_rewrite_rule = <<< EOM
 # BEGIN VA SIMPLE BASIC AUTH
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -75,72 +75,72 @@ RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
 
 EOM;
 
-		if ( ! file_exists( ABSPATH.'.htaccess' ) || ! $action ) {
+			if ( ! file_exists( ABSPATH.'.htaccess' ) || ! $action ) {
+				return;
+			}
+			$htaccess = file_get_contents( ABSPATH.'.htaccess' );
+
+			switch ( $action ) {
+				case 'activation':
+						if ( strpos( $htaccess, $htaccess_rewrite_rule ) !== false ) {
+							return;
+						}
+						file_put_contents( ABSPATH.'.htaccess', $htaccess_rewrite_rule . $htaccess );
+					break;
+				case 'uninstall':
+						if ( strpos( $htaccess, $htaccess_rewrite_rule ) === false ) {
+							return;
+						}
+						file_put_contents( ABSPATH.'.htaccess', str_replace( $htaccess_rewrite_rule, '', $htaccess ) );
+					break;
+			}
+		}
+
+		/**
+		 * [_vasba_activation description]
+		 * @return [type] [description]
+		 */
+		function _vasba_activation() {
+			self::_vasba_edit_htaccess( 'activation' );
 			return;
 		}
-		$htaccess = file_get_contents( ABSPATH.'.htaccess' );
 
-		switch ( $action ) {
-			case 'activation':
-					if ( strpos( $htaccess, $htaccess_rewrite_rule ) !== false ) {
-						return;
-					}
-					file_put_contents( ABSPATH.'.htaccess', $htaccess_rewrite_rule . $htaccess );
-				break;
-			case 'uninstall':
-					if ( strpos( $htaccess, $htaccess_rewrite_rule ) === false ) {
-						return;
-					}
-					file_put_contents( ABSPATH.'.htaccess', str_replace( $htaccess_rewrite_rule, '', $htaccess ) );
-				break;
-		}
-	}
-
-	/**
-	 * [_vasba_activation description]
-	 * @return [type] [description]
-	 */
-	function _vasba_activation() {
-		self::_vasba_edit_htaccess( 'activation' );
-		return;
-	}
-
-	/**
-	 * [_vasba_uninstall description]
-	 * @return [type] [description]
-	 */
-	function _vasba_uninstall() {
-		self::_vasba_edit_htaccess( 'uninstall' );
-		return;
-	}
-
-	/**
-	 * [_vasba_basic_auth description]
-	 * @link http://php.net/manual/ja/features.http-auth.php
-	 * @return [type] [description]
-	 */
-	function _vasba_basic_auth() {
-		$auth_user = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? $_SERVER['PHP_AUTH_USER'] : '';
-		$auth_pw   = ( isset( $_SERVER['PHP_AUTH_PW'] ) ) ? $_SERVER['PHP_AUTH_PW'] : '';
-		if ( empty( $auth_user )
-			 && empty( $auth_pw )
-			 && isset( $_SERVER['HTTP_AUTHORIZATION'] )
-			 && preg_match( '/Basic\s+(.*)\z/i', $_SERVER['HTTP_AUTHORIZATION'], $matches )
-		) {
-			list( $auth_user, $auth_pw ) = explode( ':', base64_decode( $matches[1] ) );
-			$auth_user                   = strip_tags( $auth_user );
-			$auth_pw                     = strip_tags( $auth_pw );
-		}
-
-		nocache_headers();
-
-		if ( is_user_logged_in() || ! is_wp_error( wp_authenticate( $auth_user, $auth_pw ) ) ) {
+		/**
+		 * [_vasba_uninstall description]
+		 * @return [type] [description]
+		 */
+		function _vasba_uninstall() {
+			self::_vasba_edit_htaccess( 'uninstall' );
 			return;
 		}
-		header( 'WWW-Authenticate: Basic realm="Private Page"' );
-		header( 'HTTP/1.0 401 Unauthorized' );
-		die( __( 'Authorization Required.', VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN ) );
+
+		/**
+		 * [_vasba_basic_auth description]
+		 * @link http://php.net/manual/ja/features.http-auth.php
+		 * @return [type] [description]
+		 */
+		function _vasba_basic_auth() {
+			$auth_user = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? $_SERVER['PHP_AUTH_USER'] : '';
+			$auth_pw   = ( isset( $_SERVER['PHP_AUTH_PW'] ) ) ? $_SERVER['PHP_AUTH_PW'] : '';
+			if ( empty( $auth_user )
+				 && empty( $auth_pw )
+				 && isset( $_SERVER['HTTP_AUTHORIZATION'] )
+				 && preg_match( '/Basic\s+(.*)\z/i', $_SERVER['HTTP_AUTHORIZATION'], $matches )
+			) {
+				list( $auth_user, $auth_pw ) = explode( ':', base64_decode( $matches[1] ) );
+				$auth_user                   = strip_tags( $auth_user );
+				$auth_pw                     = strip_tags( $auth_pw );
+			}
+
+			nocache_headers();
+
+			if ( is_user_logged_in() || ! is_wp_error( wp_authenticate( $auth_user, $auth_pw ) ) ) {
+				return;
+			}
+			header( 'WWW-Authenticate: Basic realm="Private Page"' );
+			header( 'HTTP/1.0 401 Unauthorized' );
+			die( __( 'Authorization Required.', VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN ) );
+		}
 	}
-}
-new VA_SIMPLE_BASIC_AUTH;
+	new VA_SIMPLE_BASIC_AUTH;
 endif;
