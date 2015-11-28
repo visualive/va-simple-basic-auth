@@ -52,6 +52,9 @@ if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
 	 * VA_SIMPLE_BASIC_AUTH
 	 */
 	class VA_SIMPLE_BASIC_AUTH {
+		/**
+		 * [__construct description]
+		 */
 		function __construct() {
 			register_activation_hook( __FILE__, array( $this, '_vasba_activation' ) );
 			register_uninstall_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
@@ -85,16 +88,16 @@ EOM;
 
 			switch ( $action ) {
 				case 'activation':
-						if ( strpos( $htaccess, $htaccess_rewrite_rule ) !== false ) {
-							return;
-						}
-						file_put_contents( ABSPATH.'.htaccess', $htaccess_rewrite_rule . $htaccess );
+					if ( strpos( $htaccess, $htaccess_rewrite_rule ) !== false ) {
+						return;
+					}
+					file_put_contents( ABSPATH.'.htaccess', $htaccess_rewrite_rule . $htaccess );
 					break;
 				case 'uninstall':
-						if ( strpos( $htaccess, $htaccess_rewrite_rule ) === false ) {
-							return;
-						}
-						file_put_contents( ABSPATH.'.htaccess', str_replace( $htaccess_rewrite_rule, '', $htaccess ) );
+					if ( strpos( $htaccess, $htaccess_rewrite_rule ) === false ) {
+						return;
+					}
+					file_put_contents( ABSPATH.'.htaccess', str_replace( $htaccess_rewrite_rule, '', $htaccess ) );
 					break;
 			}
 		}
