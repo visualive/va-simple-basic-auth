@@ -7,7 +7,9 @@
  * @author KUCKLU <kuck1u@visualive.jp>
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /*
 Plugin Name: VA Simple Basic Auth
