@@ -65,7 +65,8 @@ if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
 		/**
 		 * [_vasba_edit_htaccess description]
 		 * @link https://github.com/wokamoto/wp-basic-auth
-		 * @param  boolean $action
+		 * @param  boolean $action .
+		 * @return null
 		 */
 		public function _vasba_edit_htaccess( $action = false ) {
 			$htaccess_rewrite_rule = <<< EOM
