@@ -125,24 +125,4 @@
 	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
 	<rule ref="Generic.Classes.DuplicateClassName"/>
 	<rule ref="Generic.Strings.UnnecessaryStringConcat"/>
-
-	<rule ref="WordPress.Arrays.ArrayDeclaration">
-		<exclude name="WordPress.Arrays.ArrayDeclaration.SingleLineNotAllowed" />
-	</rule>
-	<rule ref="WordPress.Arrays.ArrayKeySpacingRestrictions"/>
-	<rule ref="WordPress.Classes.ValidClassName"/>
-	<rule ref="WordPress.Files.FileName"/>
-	<rule ref="WordPress.NamingConventions.ValidFunctionName"/>
-	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing"/>
-	<rule ref="WordPress.WhiteSpace.OperatorSpacing"/>
-	<rule ref="WordPress.WhiteSpace.CastStructureSpacing"/>
-	<rule ref="WordPress.PHP.StrictComparisons"/>
-	<rule ref="WordPress.PHP.YodaConditions"/>
-
-	<rule ref="WordPress.XSS.EscapeOutput"/>
-	<rule ref="WordPress.CSRF.NonceVerification"/>
-	<rule ref="WordPress.PHP.DiscouragedFunctions"/>
-	<rule ref="WordPress.WP.EnqueuedResources"/>
-	<rule ref="WordPress.WP.PreparedSQL"/>
-	<rule ref="WordPress.Variables.GlobalVariables"/>
 </ruleset>
