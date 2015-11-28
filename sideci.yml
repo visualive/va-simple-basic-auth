@@ -1,5 +1,4 @@
 linter:
   code_sniffer:
     options:
-      config-set: ./test/
-      standard: WordPress
+      standard: ./test/WordPress/ruleset.xml
