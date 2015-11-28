@@ -48,6 +48,7 @@ define( 'VA_SIMPLE_BASIC_AUTH_VERSION', $vasba_plugin_data['ver'] );
 define( 'VA_SIMPLE_BASIC_AUTH_TEXTDOMAIN', $vasba_plugin_data['mo'] );
 
 if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
+
 	/**
 	 * VA_SIMPLE_BASIC_AUTH
 	 */
@@ -58,15 +59,14 @@ if ( ! class_exists( 'VA_SIMPLE_BASIC_AUTH' ) ) :
 		function __construct() {
 			register_activation_hook( __FILE__, array( $this, '_vasba_activation' ) );
 			register_uninstall_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
-			// register_deactivation_hook( __FILE__, array( $this, '_vasba_uninstall' ) );
 			add_action( 'login_init', array( $this, '_vasba_basic_auth' ), 0 );
 		}
 
 		/**
 		 * [_vasba_edit_htaccess description]
 		 * @link https://github.com/wokamoto/wp-basic-auth
-		 * @param  boolean $action [description]
-		 * @return [type]        [description]
+		 * @param  boolean $action
+		 * @return null
 		 */
 		public function _vasba_edit_htaccess( $action = false ) {
 			$htaccess_rewrite_rule = <<< EOM
@@ -123,7 +123,7 @@ EOM;
 		/**
 		 * [_vasba_basic_auth description]
 		 * @link http://php.net/manual/ja/features.http-auth.php
-		 * @return [type] [description]
+		 * @return null
 		 */
 		function _vasba_basic_auth() {
 			$auth_user = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? $_SERVER['PHP_AUTH_USER'] : '';
