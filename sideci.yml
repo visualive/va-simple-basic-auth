@@ -1,4 +1,5 @@
 linter:
   code_sniffer:
     options:
-      standard: PSR1
+      config-set: ./test/
+      standard: WordPress
