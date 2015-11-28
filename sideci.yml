@@ -1,4 +1,4 @@
 linter:
   code_sniffer:
     options:
-      standard: cs.ruleset.xml
+      standard: PSR1
