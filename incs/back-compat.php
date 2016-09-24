@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 if ( false === va_simplebasicauth_version_check() ) {
 	add_action( 'admin_notices', function () {
-		$message = sprintf( __( '%s requires at least WordPress version %s and PHP version %s. You are running WordPress version %s and PHP version %s. Please upgrade and try again.', 'va-simple-basic-auth' ), VA_SIMPLEBASICAUTH_NAME, VA_SIMPLEBASICAUTH_VERSION_WP, VA_SIMPLEBASICAUTH_VERSION_PHP, $GLOBALS['wp_version'], PHP_VERSION );
+		$message = sprintf( __( '%1$s requires at least WordPress version %2$s and PHP version %3$s. You are running WordPress version %4$s and PHP version %5$s. Please upgrade and try again.', 'va-simple-basic-auth' ), VA_SIMPLEBASICAUTH_NAME, VA_SIMPLEBASICAUTH_VERSION_WP, VA_SIMPLEBASICAUTH_VERSION_PHP, $GLOBALS['wp_version'], PHP_VERSION );
 		printf( '<div class="error"><p>%s</p></div>', esc_html( $message ) );
 	} );
 }

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VA Extra Settings\n"
-"POT-Creation-Date: 2016-09-25 05:52+0900\n"
+"POT-Creation-Date: 2016-09-25 08:46+0900\n"
 "PO-Revision-Date: 2016-09-23 19:22+0900\n"
 "Last-Translator: \n"
 "Language-Team: VisuAlive\n"
@@ -17,11 +17,11 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_x;esc_html__;esc_html_e;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: functions.php:72
+#: incs/back-compat.php:33
 #, php-format
-msgid "%s requires at least WordPress version %s and PHP version %s. You are running WordPress version %s and PHP version %s. Please upgrade and try again."
+msgid "%1$s requires at least WordPress version %2$s and PHP version %3$s. You are running WordPress version %4$s and PHP version %5$s. Please upgrade and try again."
 msgstr ""
 
-#: incs/class-module-basic-auth.php:78
+#: incs/class-module-basic-auth.php:57
 msgid "Authorization Required."
 msgstr ""
