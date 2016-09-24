@@ -3,3 +3,6 @@ linter:
     options:
       standard: WordPress
       extensions: php
+  phpmd:
+    options:
+      rule: phpmd.xml
