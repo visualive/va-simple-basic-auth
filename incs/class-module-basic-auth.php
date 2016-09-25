@@ -55,12 +55,12 @@ namespace VASIMPLEBASICAUTH\Modules {
 		 */
 		public function basic_auth() {
 			$error_title = __( 'Authorization Required.', 'va-simple-basic-auth' );
-			$auth_user   = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? trim( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
-			$auth_pw     = ( isset( $_SERVER['PHP_AUTH_PW'] ) ) ?  trim( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
+			$auth_user   = isset( $_SERVER['PHP_AUTH_USER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
+			$auth_pw     = isset( $_SERVER['PHP_AUTH_PW'] ) ?  sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
 			if ( empty( $auth_user )
 			     && empty( $auth_pw )
 			     && isset( $_SERVER['HTTP_AUTHORIZATION'] )
-			     && preg_match( '/Basic\s+(.*)\z/i', trim( wp_unslash( $_SERVER['HTTP_AUTHORIZATION'] ) ), $matches )
+			     && preg_match( '/Basic\s+(.*)\z/i', sanitize_text_field( wp_unslash( $_SERVER['HTTP_AUTHORIZATION'] ) ), $matches )
 			) {
 				list( $auth_user, $auth_pw ) = explode( ':', base64_decode( $matches[1] ) );
 				$auth_user = wp_strip_all_tags( $auth_user );
