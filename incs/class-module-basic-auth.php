@@ -56,7 +56,7 @@ namespace VASIMPLEBASICAUTH\Modules {
 		public function basic_auth() {
 			$error_title = __( 'Authorization Required.', 'va-simple-basic-auth' );
 			$auth_user   = isset( $_SERVER['PHP_AUTH_USER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
-			$auth_pw     = isset( $_SERVER['PHP_AUTH_PW'] ) ?  sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
+			$auth_pw     = isset( $_SERVER['PHP_AUTH_PW'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
 			if ( empty( $auth_user )
 			     && empty( $auth_pw )
 			     && isset( $_SERVER['HTTP_AUTHORIZATION'] )
