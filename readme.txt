@@ -12,7 +12,7 @@ Simply by enabling the plugin can set up a basic auth to dashboard and login pag
 
 == Description ==
 
-This plugin the very simple.
+This plugin the very simple.  
 Simply by enabling the plugin can set up a basic auth to dashboard and login page.  
 Auth information of Basic Auth is your WordPress user name and password.
 
