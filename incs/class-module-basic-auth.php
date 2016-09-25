@@ -55,16 +55,16 @@ namespace VASIMPLEBASICAUTH\Modules {
 		 */
 		public function basic_auth() {
 			$error_title = __( 'Authorization Required.', 'va-simple-basic-auth' );
-			$auth_user   = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? $_SERVER['PHP_AUTH_USER'] : '';
-			$auth_pw     = ( isset( $_SERVER['PHP_AUTH_PW'] ) ) ? $_SERVER['PHP_AUTH_PW'] : '';
+			$auth_user   = ( isset( $_SERVER['PHP_AUTH_USER'] ) ) ? trim( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
+			$auth_pw     = ( isset( $_SERVER['PHP_AUTH_PW'] ) ) ?  trim( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
 			if ( empty( $auth_user )
 			     && empty( $auth_pw )
 			     && isset( $_SERVER['HTTP_AUTHORIZATION'] )
-			     && preg_match( '/Basic\s+(.*)\z/i', $_SERVER['HTTP_AUTHORIZATION'], $matches )
+			     && preg_match( '/Basic\s+(.*)\z/i', trim( wp_unslash( $_SERVER['HTTP_AUTHORIZATION'] ) ), $matches )
 			) {
 				list( $auth_user, $auth_pw ) = explode( ':', base64_decode( $matches[1] ) );
-				$auth_user = strip_tags( $auth_user );
-				$auth_pw   = strip_tags( $auth_pw );
+				$auth_user = wp_strip_all_tags( $auth_user );
+				$auth_pw   = wp_strip_all_tags( $auth_pw );
 			}
 
 			nocache_headers();
@@ -76,7 +76,7 @@ namespace VASIMPLEBASICAUTH\Modules {
 			header( 'WWW-Authenticate: Basic realm="Private Page"' );
 			header( 'HTTP/1.0 401 Unauthorized' );
 
-			die( $error_title );
+			die( esc_html( $error_title ) );
 		}
 	}
 }
