@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 ## Description
 
-Simply by enabling the plugin can set up a basic auth to dashboard and login page.  
-Auth information of Basic auth is your user name and password of WordPress.  
 This plugin the very simple.
+Simply by enabling the plugin can set up a basic auth to dashboard and login page.  
+Auth information of Basic Auth is your WordPress user name and password.
 
 ### Requires
 * WordPress 4.3 or higher
