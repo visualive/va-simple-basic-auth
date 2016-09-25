@@ -57,7 +57,6 @@ RewriteRule ^(.*) - [E=HTTP_AUTHORIZATION:%1]
 </IfModule>
 # END VA SIMPLE BASIC AUTH
 
-
 EOM;
 
 			return apply_filters( 'va_simple_basic_auth_mod_rewrite', $mod_rewrite );

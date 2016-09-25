@@ -151,12 +151,18 @@ namespace VASIMPLEBASICAUTH\Modules {
 			switch ( $action ) {
 				case 'install':
 					if ( false === $strpos ) {
-						file_put_contents( self::get_path_htaccess(), $file['mod_rewrite'] . $file['content'] );
+						file_put_contents(
+							self::get_path_htaccess(),
+							str_replace( '# BEGIN WordPress', $file['mod_rewrite'] . "\n# BEGIN WordPress", $file['content'] )
+						);
 					}
 					break;
 				case 'uninstall':
 					if ( true === $strpos ) {
-						file_put_contents( self::get_path_htaccess(), str_replace( $file['mod_rewrite'], '', $file['content'] ) );
+						file_put_contents(
+							self::get_path_htaccess(),
+							str_replace( $file['mod_rewrite'], '', $file['content'] )
+						);
 					}
 					break;
 			}

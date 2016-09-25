@@ -54,31 +54,28 @@ namespace VASIMPLEBASICAUTH\Modules {
 		 * Run Basic Auth.
 		 */
 		public function basic_auth() {
-			self::_set_auth_headers();
+			$server    = $_SERVER;
+			$auth_user = isset( $server['PHP_AUTH_USER'] ) ? $server['PHP_AUTH_USER'] : '';
+			$auth_pw   = isset( $server['PHP_AUTH_PW'] ) ? $server['PHP_AUTH_PW'] : '';
 
-			$auth_user = isset( $_SERVER['PHP_AUTH_USER'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_USER'] ) ) : '';
-			$auth_pw   = isset( $_SERVER['PHP_AUTH_PW'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_AUTH_PW'] ) ) : '';
+			if ( empty( $auth_user )
+			     && empty( $auth_pw )
+			     && isset( $server['HTTP_AUTHORIZATION'] )
+			     && preg_match( '/Basic\s+(.*)\z/i', $server['HTTP_AUTHORIZATION'], $matches )
+			) {
+				list( $auth_user, $auth_pw ) = explode( ':', base64_decode( $matches[1] ) );
+			}
 
-			if ( ! empty( $auth_user ) && ! empty( $auth_pw ) ) {
-				nocache_headers();
+			$auth_user = wp_strip_all_tags( wp_unslash( $auth_user ) );
+			$auth_pw   = wp_strip_all_tags( wp_unslash( $auth_pw ) );
 
-				if ( is_user_logged_in() || ! is_wp_error( wp_authenticate( $auth_user, $auth_pw ) ) ) {
-					return;
-				}
+			nocache_headers();
+
+			if ( is_user_logged_in() || ! is_wp_error( wp_authenticate( $auth_user, $auth_pw ) ) ) {
+				return;
 			}
 
 			self::_authenticate();
-		}
-
-		/**
-		 * Set http auth headers.
-		 */
-		protected function _set_auth_headers() {
-			if ( isset( $_SERVER['HTTP_AUTHORIZATION'] ) && preg_match( '/Basic\s+(.*)$/i', $_SERVER['HTTP_AUTHORIZATION'], $matches ) ) {
-				list( $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'] ) = explode( ':', base64_decode( $matches[1] ) );
-			} elseif ( isset( $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ) && preg_match( '/Basic\s+(.*)$/i', $_SERVER['REDIRECT_HTTP_AUTHORIZATION'], $matches ) ) {
-				list( $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'] ) = explode( ':', base64_decode( $matches[1] ) );
-			}
 		}
 
 		/**
